@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/layout">
+
+<ImageView
+    android:layout_width="50dp"
+    android:layout_height="50dp"
+android:src="@drawable/ic_baseline_access_alarm_24"
+    android:layout_alignParentLeft="true"
+    android:id="@+id/Imgview"
+    />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="HEADING"
+        android:textSize="18dp"
+        android:id="@+id/Heading"
+        android:layout_toRightOf="@+id/Imgview"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="23dp"
+        android:text="fsfhm,cbj"
+        android:layout_below="@+id/Heading"
+        android:layout_toRightOf="@id/Imgview"
+        android:id="@+id/Desc"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:id="@+id/snooze"
+        android:text="Snooze"
+        android:layout_below="@id/Desc"
+        />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:id="@+id/off"
+        android:text="Off"
+        android:layout_toRightOf="@id/snooze"
+        android:layout_below="@id/Desc"
+        />
+
+</RelativeLayout>

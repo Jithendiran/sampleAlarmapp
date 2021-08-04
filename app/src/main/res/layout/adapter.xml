@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="10dp"
+    android:id="@+id/alarm">
+<!--<CheckBox-->
+<!--    android:layout_width="wrap_content"-->
+<!--    android:layout_height="wrap_content"-->
+<!--    android:id="@+id/checkbox"-->
+<!--    />-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/hours"
+        android:text="12"
+        android:textSize="30dp"
+         />
+<!-- this is for above tag if checkbox available android:layout_toRightOf="@+id/checkbox"-->
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=":"
+        android:id="@+id/seprate"
+        android:textSize="30dp"
+        android:layout_toRightOf="@+id/hours"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/minute"
+        android:text="00"
+        android:layout_toRightOf="@+id/seprate"
+        android:textSize="30dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/session"
+        android:text="Am"
+        android:layout_toRightOf="@+id/minute"
+        android:textSize="30dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Thu,June 7,2000"
+        android:layout_below="@+id/hours"
+
+        android:textSize="18dp"
+        android:id="@+id/date"
+
+        />
+    <!-- this is for above tag if checkbox available       android:paddingLeft="20dp"-->
+
+    <Switch
+        android:id="@+id/toggleswitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:padding="20dp"
+        />
+
+
+</RelativeLayout>

@@ -3,29 +3,19 @@
 package com.jidesh.ji_alarm.alarm
 
 
-import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import android.graphics.Color
-import android.media.Ringtone
-import android.media.RingtoneManager
-import android.net.Uri
 import android.os.Build
-import android.os.Bundle
-import android.os.VibrationEffect
-import android.os.Vibrator
-import android.service.autofill.Validators.not
 import android.util.Log
 import android.widget.RemoteViews
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
-import androidx.core.app.NotificationManagerCompat
-import com.jidesh.ji_alarm.MainActivity
+import androidx.core.content.ContextCompat.getSystemService
 import com.jidesh.ji_alarm.R
 import com.jidesh.ji_alarm.database.DatabaseHandler
 import com.jidesh.ji_alarm.service.AlarmRingService
@@ -49,6 +39,8 @@ class BroadCast: BroadcastReceiver()
 
                 databaseHandler = DatabaseHandler(context)
                 val id = intent.extras!!.getInt("Id")
+                val snooze_flag = intent.extras!!.getString("snooze")
+
                 val dateandtime = databaseHandler.getOneValue(id)
                 //vibrate(context)
                 //notificationsound(context)
@@ -77,17 +69,26 @@ class BroadCast: BroadcastReceiver()
                 val alarmoff_pending:PendingIntent = PendingIntent.getBroadcast(context,2,alarmoff_intent,PendingIntent.FLAG_UPDATE_CURRENT)
 
                 val notification_layout = RemoteViews(context.packageName,R.layout.notification)
-                notification_layout.setTextViewText(R.id.Heading,"Alarm or Remainder")
+
                 notification_layout.setTextViewText(R.id.Desc,"${dateandtime.date_and_time}")
                 notification_layout.setImageViewResource(R.id.Imgview,R.drawable.ic_baseline_alarm_on_24)
                 notification_layout.setTextViewText(R.id.snooze,"Snooze")
                 notification_layout.setTextViewText(R.id.off,"OFF")
 
+                if (snooze_flag != null)
+                {
+                    notification_layout.setTextViewText(R.id.Heading,"Snoozing")
+                }
+                else
+                {
+                    notification_layout.setTextViewText(R.id.Heading,"Alarm ")
+                }
+
                 notification_layout.setOnClickPendingIntent(R.id.snooze,snooze_pending)
                 notification_layout.setOnClickPendingIntent(R.id.off,alarmoff_pending)
 
-                
 
+                val mNotificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
                 val notification:NotificationCompat.Builder = NotificationCompat.Builder(context,"JI_Alarm")
                     .setSmallIcon(R.drawable.ic_baseline_access_alarm_24)
@@ -95,12 +96,19 @@ class BroadCast: BroadcastReceiver()
                     .setAutoCancel(true)
                    .setContent(notification_layout)
 
-
-                with(NotificationManagerCompat.from(context)){
-                    notify(1, notification.build())
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
+                {
+                    val channelId = "com.jidesh.ji_alarm"
+                    val channel = NotificationChannel(
+                        channelId,
+                        "Channel human readable title",
+                        NotificationManager.IMPORTANCE_HIGH
+                    )
+                    mNotificationManager.createNotificationChannel(channel)
+                    notification.setChannelId(channelId)
                 }
 
-                //notification end
+                mNotificationManager.notify(0, notification.build());
 
                 val sharedPreferences = context.getSharedPreferences("com.jidesh.ji_alarm.shared", Context.MODE_PRIVATE)
                 if (sharedPreferences.getBoolean("IsAlive", true))
@@ -116,10 +124,6 @@ class BroadCast: BroadcastReceiver()
 
             }
         }
-
-
-
-
 
 
 }

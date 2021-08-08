@@ -22,10 +22,13 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".alarm.LockScreenActivity"
+        <activity android:name=".alarm.LockscreenActivity"
             android:launchMode="singleTop"
             android:showOnLockScreen="true"
-             />
+            android:noHistory="true"
+             >
+
+        </activity>
         <receiver android:name=".alarm.BroadCast">
 
         </receiver>

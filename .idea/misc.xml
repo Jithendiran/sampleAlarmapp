@@ -5,7 +5,7 @@
       <map>
         <entry key="app/src/main/res/layout/a.xml" value="0.19895833333333332" />
         <entry key="app/src/main/res/layout/adapter.xml" value="0.17708333333333334" />
-        <entry key="app/src/main/res/layout/fullscreen.xml" value="0.30520833333333336" />
+        <entry key="app/src/main/res/layout/fullscreen.xml" value="0.25" />
         <entry key="app/src/main/res/layout/notification.xml" value="0.17708333333333334" />
       </map>
     </option>

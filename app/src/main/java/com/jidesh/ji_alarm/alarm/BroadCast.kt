@@ -10,6 +10,7 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.os.Build
+import android.os.Bundle
 import android.util.Log
 import android.widget.RemoteViews
 import android.widget.Toast
@@ -24,6 +25,7 @@ import android.os.PowerManager
 import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.*
 import com.jidesh.ji_alarm.database.Database
+import java.lang.Exception
 
 
 class BroadCast: BroadcastReceiver()
@@ -62,8 +64,21 @@ class BroadCast: BroadcastReceiver()
                 else
                 {
                     Log.d("A","Screen off")
-                    context.startActivity(Intent(context,LockscreenActivity::class.java))
-                    createNotification(context,dateandtime,snooze_flag)
+                    val screenoffintent = Intent(context,LockscreenActivity::class.java)
+                    //screenoffintent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+                    screenoffintent.putExtra("com.jidesh.ji_alarm.data",dateandtime)
+
+                    try {
+                        Log.d("A", "broadcast data ${screenoffintent.extras!!.getParcelable<Database>("com.jidesh.ji_alarm.data")}")
+                    }
+                    catch (e:Exception)
+                    {
+                        Log.d("A", "broadcast error ${e.message}")
+                    }
+
+                    context.startActivity(screenoffintent)
+
                 }
 
 

@@ -5,13 +5,14 @@
     android:orientation="vertical"
     android:paddingTop="40dp">
 
-    <DigitalClock
+    <TextClock
 
         android:id="@+id/digital_clock"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="45dp"
         android:textAlignment="center"
+        android:format12Hour="hh:mm:ss a"
         />
 
     <AnalogClock
@@ -36,7 +37,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.75"
-            android:text="Snooze" />
+            android:text="Snooze"
+            android:id="@+id/snoozebutton"/>
 
         <Space
             android:layout_width="0dp"
@@ -47,7 +49,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.75"
-            android:text="OFF" />
+            android:text="OFF"
+            android:id="@+id/offbutton"/>
     </LinearLayout>
 
 </RelativeLayout>

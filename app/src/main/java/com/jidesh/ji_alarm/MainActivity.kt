@@ -1,6 +1,7 @@
 package com.jidesh.ji_alarm
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -25,15 +26,7 @@ class MainActivity() : AppCompatActivity()
     private var databaseHandler:DatabaseHandler = DatabaseHandler(this)
     private lateinit var alarm :Alarm
     private  lateinit var itemSwiper:ItemTouchHelper
-
-    override fun onStart() {
-        super.onStart()
-        val sharedPref = applicationContext.getSharedPreferences("com.jidesh.ji_alarm.shared",Context.MODE_PRIVATE)
-        val edit =  sharedPref.edit()
-        edit.putBoolean("IsAlive",true)
-        edit.apply()
-        Log.d("A","On start")
-    }
+    lateinit var sharedPref:SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?)
     {
@@ -53,6 +46,11 @@ class MainActivity() : AppCompatActivity()
             Log.d("A","After add alarm")
         }
 
+
+        sharedPref = applicationContext.getSharedPreferences("com.jidesh.ji_alarm.shared",Context.MODE_PRIVATE)
+        val edit =  sharedPref.edit()
+        edit.putBoolean("IsAlive",true)
+        edit.apply()
 
 
 
@@ -237,22 +235,21 @@ class MainActivity() : AppCompatActivity()
         recycler.adapter!!.notifyDataSetChanged()
     }
 
-    override fun onStop() {
-        super.onStop()
-       // recycler.adapter!!.notifyDataSetChanged()
 
-        Log.d("A","ONstop")
+    override fun onRestart() {
+        Log.d("A","On restart")
+        super.onRestart()
+        //recycler.adapter!!.notifyDataSetChanged()
+
     }
-
-
-
     override fun onDestroy() {
         super.onDestroy()
-        val sharedPref = applicationContext.getSharedPreferences("com.jidesh.ji_alarm.shared",Context.MODE_PRIVATE)
+        //sharedPref = applicationContext.getSharedPreferences("com.jidesh.ji_alarm.shared",Context.MODE_PRIVATE)
         val edit =  sharedPref.edit()
         edit.putBoolean("IsAlive",false)
         edit.apply()
         Log.d("A","ONdestroy")
+
     }
 
 

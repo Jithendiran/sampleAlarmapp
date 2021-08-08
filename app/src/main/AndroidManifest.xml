@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
 
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.jidesh.ji_alarm">
 
     <uses-permission android:name="android.permission.VIBRATE" />
@@ -12,6 +13,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Ji_Alarm">
+
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,7 +22,10 @@
             </intent-filter>
         </activity>
 
-
+        <activity android:name=".alarm.LockScreenActivity"
+            android:launchMode="singleTop"
+            android:showOnLockScreen="true"
+             />
         <receiver android:name=".alarm.BroadCast">
 
         </receiver>
@@ -37,6 +42,8 @@
         </receiver>
 
         <service android:name=".service.AlarmRingService"/>
+
+
     </application>
 
 </manifest>

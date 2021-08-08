@@ -34,7 +34,7 @@ class Alarm(private var context:Context)
 
         val pendingIntent:PendingIntent = PendingIntent.getBroadcast(context,req,intent,PendingIntent.FLAG_UPDATE_CURRENT)
 
-        alarm.set(AlarmManager.RTC_WAKEUP,calendar.toCalendar(date).timeInMillis,pendingIntent)
+        alarm.setExact(AlarmManager.RTC_WAKEUP,calendar.toCalendar(date).timeInMillis,pendingIntent)
 
         Toast.makeText(context,"Alarm in ${calendar.remaintime(calendar.toCalendar(date).timeInMillis - calendar.getCurrentDate().time)}",Toast.LENGTH_SHORT).show()
     }
